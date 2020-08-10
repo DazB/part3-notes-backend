@@ -3,6 +3,7 @@ const cors = require('cors')
 
 const app = express()
 
+app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
 
@@ -12,10 +13,6 @@ const requestLogger = (request, response, next) => {
   console.log('Body:', request.body)
   console.log('---')
   next()
-}
-
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
 }
 
 app.use(requestLogger)
@@ -96,6 +93,10 @@ app.post('/api/notes', (request, response) => {
 
   response.json(note)
 })
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
 
 app.use(unknownEndpoint)
 
