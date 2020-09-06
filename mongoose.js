@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { response } = require('express')
 
 if (process.argv.length < 3) {
   console.log('Please give pass')
